@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { validate } from "../middlewares/validator.middleware.js";
-import { userRegistrationValidator, userLoginValidator} from '../validators/index.js'
+import { userRegistrationValidator, userLoginValidator,userForgotPasswordValidator,userResetForgottenPasswordValidator} from '../validators/index.js'
 import { registerUser,verifyEmail,loginUser,getCurrentUser,logoutUser,resendVerificationEmail,forgotPasswordRequest,changeCurrentPassword} from "../controllers/auth.controllers.js";
 import {upload} from '../middlewares/multer.middleware.js'
 import {verifyJWT} from '../middlewares/verifyJwt.middleware.js'
@@ -11,6 +11,6 @@ router.post("/login",userLoginValidator(),validate,loginUser)
 router.get("/me",verifyJWT,getCurrentUser)
 router.post("/logout",verifyJWT,logoutUser)
 router.post("/resendVerificationEmail",resendVerificationEmail)
-router.post("/forgotPasswordRequest",forgotPasswordRequest)
-router.post("/changePassword/:forgotPasswordToken",changeCurrentPassword)
+router.post("/forgotPasswordRequest",userForgotPasswordValidator(),validate,forgotPasswordRequest)
+router.post("/changePassword/:forgotPasswordToken",userResetForgottenPasswordValidator(),validate,changeCurrentPassword)
 export default router;

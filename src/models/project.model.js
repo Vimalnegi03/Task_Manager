@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import {Schema} from 'mongoose'
 const projectSchema=new mongoose.Schema({
  name:{
     type:String,

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import {Schema} from 'mongoose'
 const noteSchema=new mongoose.Schema({
 project:{
     type:Schema.Types.ObjectId,

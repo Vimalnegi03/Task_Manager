@@ -55,7 +55,7 @@ const userForgotPasswordValidator = () => {
 };
 
 const userResetForgottenPasswordValidator = () => {
-  return [body("newPassword").notEmpty().withMessage("Password is required")];
+  return [body("password").notEmpty().withMessage("Password is required")];
 };
 
 const createProjectValidator = () => {
