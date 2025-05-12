@@ -5,14 +5,16 @@ import dotenv from 'dotenv'
 dotenv.config()
 import crypto from 'crypto'
 const userSchema=new mongoose.Schema({
-avatar:{
- type:{
-    url:String,
-    localPath:String
-},
-default:"https://placehold.co/600x400",
-localPath:""
-},
+    avatar: {
+        url: {
+          type: String,
+          default: "https://placehold.co/600x400"
+        },
+        localPath: {
+          type: String,
+          default: ""
+        }
+      },
 username:{
     type:String,
     required:true,
@@ -54,7 +56,7 @@ emailVerificationToken:{
 },
 emailVerificationExpiry:{
     type:Date
-}
+},
 
 },{timestamps:true})
 
@@ -72,10 +74,11 @@ userSchema.methods.isPasswordCorrect=async function(password){
     return isCorrect
 }
 userSchema.methods.generateAccessToken=async function(next){
-   return jwt.sign({
+  const token= jwt.sign({
         _id:this._id,
         email:this.email
     },process.env.ACCESS_TOKEN_SECRET,{expiresIn:process.env.ACCESS_TOKEN_EXPIRY})
+    return token
   
 }
 userSchema.methods.generateRefreshToken=async function(){
