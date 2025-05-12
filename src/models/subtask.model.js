@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import {Schema} from 'mongoose'
 const subtaskSchema=new mongoose.Schema({
 title:{
     type:String,
